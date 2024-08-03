@@ -100,7 +100,7 @@ function App() {
         </div>
       ) : (
         <TonConnectUIProvider
-          manifestUrl="https://sbt-moment.vercel.app/tonconnect-manifest.json"
+          manifestUrl="https://nft-draw-rho.vercel.app/tonconnect-manifest.json"
           uiPreferences={{
             borderRadius: 'm',
             colorsSet: {
