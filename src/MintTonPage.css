@@ -1,0 +1,347 @@
+body {
+    overflow-x: hidden;
+}
+
+.upload {
+    font-size: 18px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    position: relative;
+    top: -30px;
+}
+
+.mint-ton-page {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    background: linear-gradient(90deg, #d7a1df, #8c77c0, rgb(103, 103, 224)) !important;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    overflow-y: auto;
+    height: 100vh;
+}
+  
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+  
+form {
+    display: flex;
+    flex-direction: column;
+}
+  
+div {
+    margin-bottom: 15px;
+}
+  
+/* Добавьте следующий CSS для стилизации кнопок undo/redo и их контейнера */
+
+.canvas-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.control-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6c63ff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.control-button:hover {
+    background-color: #5a53d6;
+}
+
+.control-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+  
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+  
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #6c63ff;
+}
+  
+textarea {
+    height: 100px;
+}
+  
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6c63ff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+  
+button:hover {
+    background-color: #d4d4d4;
+}
+  
+button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+  
+button[type="button"] {
+    background-color: #000000;
+}
+  
+button[type="button"]:hover {
+    background-color: #b8b5b5;
+}
+  
+.error {
+    border-color: #ff4d4d;
+}
+  
+.error-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 5px;
+}
+  
+p {
+    margin: 10px 0;
+}
+  
+a {
+    color: #4a90e2;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+}
+  
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+  
+textarea {
+    resize: none;
+    height: 80px; 
+}
+  
+.error {
+    border: 1px solid red;
+}
+  
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+  
+.toggle-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+  
+.section-title {
+    flex: 1;
+}
+  
+.plus-button,
+.minus-button {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+  
+.plus-button {
+    background-color: green;
+    color: white;
+}
+  
+.minus-button {
+    background-color: rgb(255, 255, 255);
+    color: white;
+}
+  
+.count {
+    margin: 2px 8px;
+}
+  
+.submit-button {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid #000000;
+    width: 100%; 
+    box-sizing: border-box;
+}
+  
+.submit-button:disabled {
+    background-color: rgb(202, 193, 193);
+}
+
+/* Add to MintTonPage.css */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5); /* Dark background for better visibility */
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 80%;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #bbb7b7;
+}
+
+.thickness-options {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line if needed */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.thickness-option {
+    padding: 10px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease; /* Smooth background transition */
+}
+
+.thickness-option:hover {
+    background: #aa7ee4; /* Light hover effect */
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px); /* Эффект размытия фона */
+}
+
+.modal-content {
+    background: rgb(206, 137, 228);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* MintTonPage.css */
+
+.color-picker-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  
+  #canvas {
+    background-color: white;
+  }
+
+  .modal-overlay {
+    top: 0;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px); /* Эффект размытия фона */
+  }
+  
+  .modal-content {
+    background: rgb(181, 141, 228);
+    padding: 20px;
+    border-radius: 8px;
+    position: absolute;
+    /* Устанавливаем размеры модального окна */
+    width: 400px; /* Задайте ширину по вашему усмотрению */
+    max-width: 78%; /* Устанавливаем максимальную ширину для адаптивности */
+    box-sizing: border-box; /* Учитываем паддинг в ширину */
+  }
+  
+  .close-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px white;
+    background: #7c64f5; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px white;
+    text-align: center;
+    margin-top: 10px; /* Расстояние между цветовым выбором и кнопкой */
+  }
+  
