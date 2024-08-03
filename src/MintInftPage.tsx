@@ -114,6 +114,10 @@ const MintInftPage: React.FC = () => {
           {
             trait_type: "Art",
             value: "True"
+          },
+          {
+            trait_type: "🎨",
+            value: "🖌️"
           }
         ]
       };
@@ -318,7 +322,7 @@ const redo = () => {
                 validUntil: Math.round(Date.now() / 1000) + 60 * 5,
                 messages: [
                     {
-                        address: "EQC8dWj3nrk3SVPSaA-bCR7B2dDu5xe4KX7v-NfHDQdMNg8t",
+                        address: "EQBsrBcQEljeB4clOLGBHEM5UvzZZy6_Rv65obhkJV89NdA9",
                         amount: '55000000',
                         payload                 
                     },

@@ -112,6 +112,10 @@ const MintTonPage: React.FC = () => {
           {
             trait_type: "Art",
             value: "True"
+          },
+          {
+            trait_type: "🎨",
+            value: "🖌️"
           }
         ]
       };
@@ -305,12 +309,12 @@ const redo = () => {
                 validUntil: Math.round(Date.now() / 1000) + 60 * 5,
                 messages: [
                     {
-                        address: "EQC8dWj3nrk3SVPSaA-bCR7B2dDu5xe4KX7v-NfHDQdMNg8t",
+                        address: "EQBsrBcQEljeB4clOLGBHEM5UvzZZy6_Rv65obhkJV89NdA9",
                         amount: '55000000',
                         payload                 
                     },
                     {
-                        address: "0QCsMm47egxSofgw5Y-l34ZeMw6vPYUUyTIjYT3HTafpmH9O",
+                        address: "UQAI6XfeQmLtZ8qzeoNWJRYG8wfuWQZBZHZF5-eUH7kDiZVN",
                         amount: '100000000',                 
                     }
                 ]
