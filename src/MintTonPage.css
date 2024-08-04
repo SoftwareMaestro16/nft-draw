@@ -307,6 +307,15 @@ textarea {
   #canvas {
     background-color: white;
   }
+  
+  .canvas-container {
+    overflow: hidden; /* Отключает прокрутку в контейнере */
+    position: relative; /* Позиционирование относительно контейнера */
+}
+
+#canvas {
+    touch-action: none; /* Отключает прокрутку при касании */
+}
 
   .modal-overlay {
     top: 0;

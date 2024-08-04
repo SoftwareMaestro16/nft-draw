@@ -10,6 +10,15 @@ body {
     top: -30px; 
 }
 
+.canvas-container {
+    overflow: hidden; /* Отключает прокрутку в контейнере */
+    position: relative; /* Позиционирование относительно контейнера */
+}
+
+#canvas {
+    touch-action: none; /* Отключает прокрутку при касании */
+}
+
 
 .mint-ton-page {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;

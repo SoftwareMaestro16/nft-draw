@@ -202,7 +202,7 @@ useEffect(() => {
   
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.lineWidth = 8.5; // Размер кисти
+    ctx.lineWidth = 9.5; // Размер кисти
     ctx.strokeStyle = currentColor; // Начальный цвет кисти
   
     const start = (event: MouseEvent | TouchEvent) => {
@@ -369,9 +369,10 @@ const redo = () => {
                     />
                     {errors.description && <p className="error-message">{errors.description}</p>}
                 </div>
-                <div>
-                    <canvas id="canvas" ref={canvasRef} width="300" height="300" style={{ border: '2px solid black', cursor: 'crosshair', backgroundColor: 'white', display: 'block', margin: '0 auto' }}></canvas>
-                </div>
+                <div className="canvas-container">
+    <canvas id="canvas" ref={canvasRef} width="300" height="300" style={{ border: '2px solid black', cursor: 'crosshair', backgroundColor: 'white', display: 'block', margin: '0 auto' }}></canvas>
+</div>
+
                 <div style={{ textAlign: 'center', marginTop: '10px' }}>
     <button type="button" onClick={undo} disabled={history.length === 0} style={{ margin: '5px' }}>←</button>
     <button type="button" onClick={redo} disabled={redoStack.length === 0} style={{ margin: '5px' }}>→</button>
