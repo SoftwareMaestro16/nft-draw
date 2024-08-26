@@ -192,6 +192,38 @@ const startDrawing = (ctx: CanvasRenderingContext2D, event: MouseEvent | TouchEv
 };
 
 useEffect(() => {
+  const canvas = canvasRef.current;
+
+  const preventScroll = (e: TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleTouchStart = () => {
+    WebApp.expand();
+    canvas?.addEventListener('touchmove', preventScroll, { passive: false });
+  };
+
+  const handleTouchEnd = () => {
+    canvas?.removeEventListener('touchmove', preventScroll);
+    WebApp.ready();
+  };
+
+  if (canvas) {
+    canvas.addEventListener('touchstart', handleTouchStart);
+    canvas.addEventListener('touchend', handleTouchEnd);
+  }
+
+  return () => {
+    if (canvas) {
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+      canvas.removeEventListener('touchmove', preventScroll);
+    }
+  };
+}, []);
+
+useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -357,38 +389,6 @@ const redo = () => {
 
     const isSubmitDisabled = !resultUrl;
 
-
-    useEffect(() => {
-    const canvas = canvasRef.current;
-
-    // Функция для предотвращения прокрутки
-    const preventScroll = (e: { preventDefault: () => any; }) => e.preventDefault();
-
-    // Обработчик нажатия на холст
-    const handleTouchStart = () => {
-      WebApp.expand();
-      window.addEventListener('touchmove', preventScroll, { passive: false });
-    };
-
-    // Обработчик отпускания пальца
-    const handleTouchEnd = () => {
-      window.removeEventListener('touchmove', preventScroll);
-      WebApp.ready();
-    };
-
-    if (canvas) {
-      canvas.addEventListener('touchstart', handleTouchStart);
-      canvas.addEventListener('touchend', handleTouchEnd);
-    }
-
-    // Очистка при размонтировании компонента
-    return () => {
-      if (canvas) {
-        canvas.removeEventListener('touchstart', handleTouchStart);
-        canvas.removeEventListener('touchend', handleTouchEnd);
-      }
-    };
-  }, []);
 
     return (
         <div className="mint-ton-page">
