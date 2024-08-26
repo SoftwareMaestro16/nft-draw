@@ -5,6 +5,7 @@ import { MainButton } from './MainButton';
 import { useParams } from 'react-router-dom';
 import { Address, beginCell, Cell, toNano } from "@ton/core";
 import { SendTransactionRequest, useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
+import WebApp from '@twa-dev/sdk';
 
 interface FormData {
   name: string;
@@ -186,6 +187,38 @@ const startDrawing = (ctx: CanvasRenderingContext2D, event: MouseEvent | TouchEv
     canvas.addEventListener(isTouch ? 'touchmove' : 'mousemove', draw);
     canvas.addEventListener(isTouch ? 'touchend' : 'mouseup', endDrawing);
 };
+
+useEffect(() => {
+  const canvas = canvasRef.current;
+
+  const preventScroll = (e: TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleTouchStart = () => {
+    WebApp.expand();
+    canvas?.addEventListener('touchmove', preventScroll, { passive: false });
+  };
+
+  const handleTouchEnd = () => {
+    canvas?.removeEventListener('touchmove', preventScroll);
+    WebApp.ready();
+  };
+
+  if (canvas) {
+    canvas.addEventListener('touchstart', handleTouchStart);
+    canvas.addEventListener('touchend', handleTouchEnd);
+  }
+
+  return () => {
+    if (canvas) {
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+      canvas.removeEventListener('touchmove', preventScroll);
+    }
+  };
+}, []);
 
 useEffect(() => {
     const canvas = canvasRef.current;
@@ -372,19 +405,32 @@ const redo = () => {
     <canvas id="canvas" ref={canvasRef} width="300" height="300" style={{ border: '2px solid black', cursor: 'crosshair', backgroundColor: 'white', display: 'block', margin: '0 auto' }}></canvas>
 </div>
 
-                <div style={{ textAlign: 'center', marginTop: '10px' }}>
-    <button type="button" onClick={undo} disabled={history.length === 0} style={{ margin: '5px' }}>←</button>
-    <button type="button" onClick={redo} disabled={redoStack.length === 0} style={{ margin: '5px' }}>→</button>
-    
-    <div className="color-palette">
-        <button type="button" style={{ backgroundColor: 'black' }} onClick={() => handleColorChange('black')}></button>
-        <button type="button" style={{ backgroundColor: 'red' }} onClick={() => handleColorChange('red')}></button>
-        <button type="button" style={{ backgroundColor: 'blue' }} onClick={() => handleColorChange('blue')}></button>
-        <button type="button" style={{ backgroundColor: 'green' }} onClick={() => handleColorChange('green')}></button>
-        <button type="button" style={{ backgroundColor: 'yellow' }} onClick={() => handleColorChange('yellow')}></button>
-        <button type="button" style={{ backgroundColor: 'white' }} onClick={() => handleColorChange('white')}></button> {/* Добавлено */}
-    </div>
-</div>
+<div style={{ textAlign: 'center', marginTop: '10px' }}>
+                <button type="button" onClick={undo} disabled={history.length === 0} style={{ margin: '5px' }}>←</button>
+                <button type="button" onClick={redo} disabled={redoStack.length === 0} style={{ margin: '5px' }}>→</button>
+                
+                <div className="color-palette">
+                    {/* Existing colors */}
+                    <div className="color-row">
+                        <button type="button" style={{ backgroundColor: 'black' }} onClick={() => handleColorChange('black')}></button>
+                        <button type="button" style={{ backgroundColor: 'red' }} onClick={() => handleColorChange('red')}></button>
+                        <button type="button" style={{ backgroundColor: 'blue' }} onClick={() => handleColorChange('blue')}></button>
+                        <button type="button" style={{ backgroundColor: 'green' }} onClick={() => handleColorChange('green')}></button>
+                        <button type="button" style={{ backgroundColor: 'yellow' }} onClick={() => handleColorChange('yellow')}></button>
+                        <button type="button" style={{ backgroundColor: 'white' }} onClick={() => handleColorChange('white')}></button>
+                    </div>
+
+                    {/* New colors */}
+                    <div className="color-row">
+                        <button type="button" style={{ backgroundColor: 'purple' }} onClick={() => handleColorChange('purple')}></button>
+                        <button type="button" style={{ backgroundColor: 'orange' }} onClick={() => handleColorChange('orange')}></button>
+                        <button type="button" style={{ backgroundColor: 'pink' }} onClick={() => handleColorChange('pink')}></button>
+                        <button type="button" style={{ backgroundColor: 'cyan' }} onClick={() => handleColorChange('cyan')}></button>
+                        <button type="button" style={{ backgroundColor: 'magenta' }} onClick={() => handleColorChange('magenta')}></button>
+                        <button type="button" style={{ backgroundColor: '#421415' }} onClick={() => handleColorChange('#421415')}></button>
+                    </div>
+                </div>
+            </div>
                 <button
                     type="submit"
                     className="submit-button"
