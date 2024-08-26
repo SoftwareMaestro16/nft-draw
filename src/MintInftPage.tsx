@@ -7,6 +7,7 @@ import { Address, beginCell, Cell, toNano } from "@ton/core";
 import { SendTransactionRequest, useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import { getJettonWalletAddress } from './tonapi';
 import { INFT } from './constants';
+import WebApp from '@twa-dev/sdk';
 
 interface FormData {
   name: string;
@@ -355,6 +356,39 @@ const redo = () => {
     };
 
     const isSubmitDisabled = !resultUrl;
+
+
+    useEffect(() => {
+    const canvas = canvasRef.current;
+
+    // Функция для предотвращения прокрутки
+    const preventScroll = (e: { preventDefault: () => any; }) => e.preventDefault();
+
+    // Обработчик нажатия на холст
+    const handleTouchStart = () => {
+      WebApp.expand();
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+    };
+
+    // Обработчик отпускания пальца
+    const handleTouchEnd = () => {
+      window.removeEventListener('touchmove', preventScroll);
+      WebApp.ready();
+    };
+
+    if (canvas) {
+      canvas.addEventListener('touchstart', handleTouchStart);
+      canvas.addEventListener('touchend', handleTouchEnd);
+    }
+
+    // Очистка при размонтировании компонента
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener('touchstart', handleTouchStart);
+        canvas.removeEventListener('touchend', handleTouchEnd);
+      }
+    };
+  }, []);
 
     return (
         <div className="mint-ton-page">
